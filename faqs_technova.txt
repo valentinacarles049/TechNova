@@ -1,0 +1,72 @@
+GUIA DE PREGUNTAS FRECUENTES (FAQ) - TECHNOVA
+
+Esta guia explica el funcionamiento del sistema de gestion de TechNova, detallando los modulos de Gestion de Tickets, Tablero de Incidencias y Tablero de Calidad (Feedbacks), enfocado en la induccion de nuevos empleados.
+
+--- 1. MODULO DE GESTION DE TICKETS ---
+
+¿Que es un Ticket?
+Un ticket es el registro formal de una solicitud, duda, error o tarea de soporte tecnico enviada por un usuario del sistema o cliente.
+
+¿Como registro un ticket?
+La creacion de tickets esta restringida a los roles de Soporte y Administrador.
+Para registrarlo, se debe:
+1. Ingresar a la seccion de Tickets.
+2. Hacer clic en el boton "Registrar Ticket".
+3. Completar los siguientes campos requeridos:
+   - Titulo: Resumen del problema (ejemplo: "Error al procesar pago").
+   - Descripcion: Detalle del caso.
+   - Categoria: Clasificacion del caso (ejemplo: Cuentas, Pagos, Interfaz).
+   - Prioridad: Baja, Media, Alta o Critica.
+   - Estado: Por defecto inicia en "Abierto".
+   - Usuario: Nombre del cliente o reportero.
+   - Asignado: Equipo encargado (ejemplos: Soporte, Desarrollo, Monitoreo).
+   - ¿Es Incidencia?: Casilla que se marca si requiere soporte de desarrollo (exigue indicar un Juego y un Driver afectados).
+
+¿Quien tiene permisos en el modulo de Tickets?
+- Soporte y Administrador: Tienen control total. Pueden ver, registrar, editar todos los datos, actualizar el estado y eliminar tickets.
+- Desarrollo: Solo puede ver tickets y actualizar su estado. No puede registrar nuevos ni editar datos generales ni eliminar.
+- Monitoreo: Solo tiene permiso de lectura. Puede ver la lista y buscar, pero no puede registrar, editar, cambiar estados ni eliminar.
+
+¿Que pasa cuando se cierra un ticket?
+Al cambiar el estado a "Cerrado":
+- Se guarda la fecha y hora final de resolucion.
+- Todas las incidencias tecnicas hijas asociadas a ese ticket se cierran automaticamente.
+- Se ejecuta una simulacion de feedback de cliente que genera de forma automatica un registro de opinion en el Tablero de Calidad.
+
+--- 2. TABLERO DE INCIDENCIAS ---
+
+¿Que es una Incidencia y como se relaciona con un Ticket?
+Una incidencia representa una tarea tecnica especifica (un bug de programacion, actualizacion de drivers, etc.) que debe resolver el equipo de Desarrollo o Soporte. Un Ticket Padre puede tener asociadas una o multiples incidencias tecnicas.
+
+¿Como registro una incidencia?
+El equipo de Monitoreo no tiene permisos para interactuar con incidencias. Los demas equipos si pueden.
+Para registrarla:
+1. Ingresar al Tablero de Incidencias.
+2. Hacer clic en "Nueva Incidencia".
+3. Seleccionar el Ticket Padre relacionado, el Juego afectado, el Driver involucrado y escribir el Detalle tecnico de la falla.
+
+¿Como afecta el estado de las incidencias al Ticket Padre?
+Existe una regla de negocio automatizada:
+- Cierre Automatico: Si cierras una incidencia y con ella todas las incidencias de ese Ticket Padre estan completadas, el sistema cierra automaticamente el Ticket Padre y pide una respuesta de resolucion.
+- Impedimento de Cierre: Si intentas cerrar una incidencia pero todavia quedan otras abiertas asociadas al mismo ticket, el Ticket Padre no podra cerrarse y permanecera en estado "En Progreso" hasta resolver la ultima tarea tecnica.
+
+--- 3. TABLERO DE CALIDAD (FEEDBACKS) ---
+
+¿Que es el Tablero de Calidad y que clasificaciones tiene?
+Es el modulo donde se recopila la opinion de los usuarios y clientes para evaluar la calidad de la atencion. El feedback se organiza en:
+- Tipo: Queja, Sugerencia o Elogio.
+- Sentimiento: Positivo, Negativo o Neutro.
+- Estado: Nuevo, Revisado o Implementado.
+
+¿Como ingresa el Feedback al sistema?
+- Por Cierre de Ticket (Automatico): Al cerrarse un ticket de soporte, se simula de manera automatica una encuesta de satisfaccion del cliente.
+- Registro Manual: Los usuarios de Soporte, Desarrollo o Administrador pueden crear un registro de opinion manualmente cuando reciben un feedback externo (ejemplo: llamada, correo).
+
+¿Quien tiene permisos en el modulo de Calidad?
+- Soporte, Desarrollo y Administrador: Tienen permisos completos para ver metricas, registrar/simular opiniones de clientes y eliminar feedbacks.
+- Monitoreo: Solo puede ver el listado y consultar metricas generales, sin permisos para registrar, simular o eliminar.
+
+--- CONSEJOS OPERATIVOS CLAVE ---
+- Si eres del area de Desarrollo: Tu foco diario es el Tablero de Incidencias. Asegurate de actualizar y cerrar tus incidencias a tiempo para que los tickets padre de soporte se resuelvan automaticamente.
+- Si eres del area de Soporte: Tu foco diario es la Bandeja de Entrada y la Gestion de Tickets para abrir y canalizar los reportes.
+- Si eres de Monitoreo: Tu funcion es de supervision y visualizacion del Dashboard global, sin interferir en la edicion de datos.

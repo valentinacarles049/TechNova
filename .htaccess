@@ -1,0 +1,21 @@
+# ==============================================================================
+# TechNova - Protección de Seguridad Apache
+# HU-40: Protección de archivos de configuración y credenciales del servidor
+# ==============================================================================
+
+# Bloquear acceso HTTP a archivos .env, .git, etc.
+<IfModule mod_authz_core.c>
+    <FilesMatch "^\.(env|git|htaccess)">
+        Require all denied
+    </FilesMatch>
+</IfModule>
+
+<IfModule !mod_authz_core.c>
+    <FilesMatch "^\.(env|git|htaccess)">
+        Order allow,deny
+        Deny from all
+    </FilesMatch>
+</IfModule>
+
+# Deshabilitar listado de directorios
+Options -Indexes
